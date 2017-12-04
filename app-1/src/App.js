@@ -8,12 +8,16 @@ constructor(){
     string: ''
   }
 }
+handleChange(value){
+this.setState({string: value})
+}
 
   render() {
     return (
       <div className="App">
-        <input onChange></input>
-        <button>working</button>
+        <input onChange={(e)=> this.handleChange(e.target.value)}></input>
+        <p>{this.state.string}</p>
+        
       </div>
     );
   }
