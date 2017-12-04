@@ -1,19 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import ToDo from './ToDo'
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      task: ['dust'],
+      chore: ''
+    }
+    this.pushButton = this.pushButton.bind(this)
+  }
+
+  handleChange(value) {
+    this.setState({
+      chore: value
+    })
+  }
+
+  pushButton() {
+    this.setState({
+      task: [...this.state.task, this.state.chore]
+    })
+  }
+
   render() {
+    var listOfTasks = this.state.task.map((element, index) => {
+      return (
+        <ToDo key={index} task={element}/>
+      )
+    }
+
+    )
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>My To-Do List</h1>
+        <input onChange={(e) => this.handleChange(e.target.value)} type="text"
+        />
+        <button onClick={this.pushButton} >Add</button>
+        {listOfTasks}
       </div>
+
     );
   }
 }
